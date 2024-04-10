@@ -1,2 +1,5 @@
-<h1 class='text-orange'>Welcome to LBCTech</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<div class="flex flex-col justify-center text-center h-screen">
+    <h1 class='text-orange text-9xl mx-auto animate-typewriter-title overflow-hidden'>Welcome to LBCTech</h1>
+    <a href='/' class='text-orange text-5xl mt-24 mx-auto animate-typewriter-register overflow-hidden'>Register</a>
+    <a href='/' class='text-orange text-5xl mt-12 mx-auto animate-typewriter-login overflow-hidden'>Login</a>
+</div>
