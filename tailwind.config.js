@@ -11,21 +11,42 @@ export default {
       },
       'orange': '#EE6C4D',
     },
+    borderWidth: {
+      default: '1px',
+        '0': '0',
+        '2': '2px',
+        '4': '4px',
+        '8': '8px',
+        'cursor': '25px'
+    },
     fontFamily: {
       sans: ['Ubuntu Mono', 'sans-serif']
     },
     extend: {
       keyframes: {
-        type: {
-          from: {width: '0'},
-          to: {width: '9em'},
+        'type-title': {
+          '0%': {width: '0'},
+          '0.01%': {'border-right': '50px solid #E0FBFC'},
+          '99.99%': {width: '9em', 'border-right': '50px solid #E0FBFC'},
+          '100%': {width: 'auto'},
+        },
+        'type-register': {
+          '0%': {width: '0'},
+          '0.01%': {'border-right': '25px solid #E0FBFC'},
+          '99.99%': {width: '5em', 'border-right': '25px solid #E0FBFC'},
+          '100%': {width: 'auto'},
+        },
+        'type-login': {
+          '0%': {width: '0'},
+          '0.01%': {'border-right': '25px solid #E0FBFC'},
+          '99.99%': {width: '3em', 'border-right': '25px solid #E0FBFC'},
+          '100%': {width: 'auto'},
         },
       },
       animation: {
-        'typewriter-title' : 'type 2s steps(18) 1 normal both',
-        'typewriter-register' : 'type 2s steps(18) 2s 1 normal both',
-        'typewriter-login' : 'type 2s steps(18) 3s 1 normal both',
-
+        'typewriter-title' : 'type-title 2s steps(18) 1 normal backwards',
+        'typewriter-register' : 'type-register 1s steps(8) 2s 1 normal backwards',
+        'typewriter-login' : 'type-login 1s steps(5) 3s 1 normal backwards'
       },
     },
   },

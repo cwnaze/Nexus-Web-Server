@@ -1,5 +1,9 @@
 <div class="flex flex-col justify-center text-center h-screen">
     <h1 class='text-orange text-9xl mx-auto animate-typewriter-title overflow-hidden'>Welcome to LBCTech</h1>
-    <a href='/' class='text-orange text-5xl mt-24 mx-auto animate-typewriter-register overflow-hidden'>Register</a>
-    <a href='/' class='text-orange text-5xl mt-12 mx-auto animate-typewriter-login overflow-hidden'>Login</a>
+    <div class='text-orange text-5xl mt-24 mx-auto animate-typewriter-register overflow-hidden'>
+        <a href='/' class='border-blue-100 transition-all ease-in-out hover:border-r-cursor'>Register</a>
+    </div>
+    <div class='text-orange text-5xl mt-12 mx-auto animate-typewriter-login overflow-hidden'>
+        <a href='/' class='border-blue-100 transition-all ease-in-out hover:border-r-cursor'>Login</a>
+    </div>
 </div>
