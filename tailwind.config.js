@@ -27,7 +27,7 @@ export default {
         'type-title': {
           '0%': {width: '0'},
           '0.01%': {'border-right': '50px solid #E0FBFC'},
-          '99.99%': {width: '10em', 'border-right': '50px solid #E0FBFC'},
+          '99.99%': {width: '9em', 'border-right': '50px solid #E0FBFC'},
           '100%': {width: 'auto'},
         },
         'type-register': {
@@ -44,7 +44,7 @@ export default {
         },
       },
       animation: {
-        'typewriter-title' : 'type-title 2s steps(20) 1 normal backwards',
+        'typewriter-title' : 'type-title 2s steps(16) 1 normal backwards',
         'typewriter-register' : 'type-register 1s steps(8) 2s 1 normal backwards',
         'typewriter-login' : 'type-login 800ms steps(5) 3s 1 normal backwards'
       },
