@@ -1,5 +1,6 @@
-<form class='text-orange flex flex-col justify-center items-center h-screen text-2xl'>
-    <div class='flex flex-col gap-6'>
+<form class='text-orange flex flex-col justify-center items-center text-xl gap-6'>
+    <div class='flex flex-col gap-6 my-5'>
+        <a href='/' class='underline'>&larr; Back</a>
         <div class='flex gap-10'>
             <div class='flex flex-col'>
                 <label for='first-name' class=''>First Name</label>
@@ -26,6 +27,6 @@
             <label for='confirm-password'>Confirm Password</label>
             <input id='confirm-password' type='password' placeholder='Confirm Password' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
         </div>
-        <button class='bg-orange text-blue-100 mx-auto p-3 px-16 rounded-lg mt-6'>Register</button>
+        <button class='bg-orange text-blue-100 mx-auto p-3 px-16 rounded-lg border-4 border-orange mt-6 hover:bg-blue-400 hover:text-orange hover:border-blue-200 hover:font-bold'>Register</button>
     </div>
 </form>
