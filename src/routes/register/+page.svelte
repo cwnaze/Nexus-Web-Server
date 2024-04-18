@@ -1,6 +1,8 @@
 <form class='text-orange flex flex-col justify-center items-center text-xl gap-6'>
     <div class='flex flex-col gap-6 my-5'>
-        <a href='/' class='underline'>&larr; Back</a>
+        <div>
+            <a href='/' class='underline hover:text-blue-100'>&larr; Back</a>
+        </div>
         <div class='flex gap-10'>
             <div class='flex flex-col'>
                 <label for='first-name' class=''>First Name</label>
