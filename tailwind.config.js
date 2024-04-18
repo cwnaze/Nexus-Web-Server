@@ -23,6 +23,9 @@ export default {
       sans: ['Ubuntu Mono', 'sans-serif']
     },
     extend: {
+      spacing: {
+        '128': '32rem',
+      },
       keyframes: {
         'type-title': {
           '0%': {width: '0'},

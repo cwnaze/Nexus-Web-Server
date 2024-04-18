@@ -4,6 +4,6 @@
         <a href='/register' class='border-blue-100 transition-all ease-in-out hover:border-r-cursor'>Register</a>
     </div>
     <div class='text-orange text-5xl mt-12 mx-auto animate-typewriter-login overflow-hidden'>
-        <a href='/' class='border-blue-100 transition-all ease-in-out hover:border-r-cursor'>Login</a>
+        <a href='/login' class='border-blue-100 transition-all ease-in-out hover:border-r-cursor'>Login</a>
     </div>
 </div>
