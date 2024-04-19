@@ -31,6 +31,6 @@ export const actions = {
         console.log(hash_pass)
 
         const db: Connection = await ConnectDb();
-        db.query("INSERT INTO user_data (email, team_name, last_name, first_name, password) VALUES (?, ?, ?, ?, ?)", [email, t_name, l_name, f_name, hash_pass]);
+        db.query("INSERT INTO user_info (email, team_name, last_name, first_name, password) VALUES (?, ?, ?, ?, ?)", [email, t_name, l_name, f_name, hash_pass]);
     }
 };
