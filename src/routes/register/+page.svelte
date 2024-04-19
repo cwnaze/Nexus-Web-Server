@@ -3,7 +3,7 @@
     export let form;
 </script>
 
-<form method='POST' action='?/register' class='text-orange flex flex-col justify-center items-center text-xl gap-6'>
+<form method='POST' action='?/register' class='text-orange flex flex-col justify-center items-center h-screen text-xl gap-6'>
     <div class='flex flex-col gap-6 my-5'>
         <div>
             <a href='/' class='underline hover:text-blue-100'>&larr; Back</a>
@@ -27,17 +27,20 @@
         </div>
         <div class='flex flex-col'>
             <label for='email'>Email</label>
-            <input id='email' placeholder='jdoe@example.com' name='email' type='email' value={form?.email ?? ''} class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
+            <input id='email' placeholder='jdoe@example.com' name='email' type='text' value={form?.email ?? ''} class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
             {#if form?.email_missing}<p class='text-error'>Email is required</p>{/if}
+            {#if form?.email_invalid}<p class='text-error'>Enter a valid email</p>{/if}
         </div>
         <div class='flex flex-col'>
             <label for='password'>Password</label>
             <input id='password' placeholder='Password' name='password' type='password' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
             {#if form?.password_missing}<p class='text-error'>Password is required</p>{/if}
+            {#if form?.password_invalid}<p class='text-error'>Password must be at least 8 characters long</p>{/if}
         </div>
         <div class='flex flex-col'>
             <label for='confirm-password'>Confirm Password</label>
             <input id='confirm-password' placeholder='Confirm Password' name='confirm-password' type='password' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
+            {#if form?.password_mismatch}<p class='text-error'>Passwords do not match</p>{/if}
         </div>
         <button class='bg-orange text-blue-100 mx-auto p-3 px-16 rounded-lg border-4 border-orange mt-6 hover:bg-blue-400 hover:text-orange hover:border-blue-200 hover:font-bold'>Register</button>
     </div>
