@@ -1,3 +1,8 @@
+<script>
+    /** @type {import('./$types').ActionData} */
+    export let form;
+</script>
+
 <form method='POST' action='?/register' class='text-orange flex flex-col justify-center items-center text-xl gap-6'>
     <div class='flex flex-col gap-6 my-5'>
         <div>
@@ -5,25 +10,30 @@
         </div>
         <div class='flex gap-10'>
             <div class='flex flex-col'>
-                <label for='first-name' class=''>First Name</label>
-                <input id='first-name' placeholder='John' name='first-name' type='text' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'/>
+                <label for='first-name'>First Name</label>
+                <input id='first-name' placeholder='John' name='first-name' type='text' value={form?.f_name ?? ''} class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'/>
+                {#if form?.f_name_missing}<p class='text-error'>First name is required</p>{/if}
             </div>
             <div class='flex flex-col'>
                 <label for='last-name'>Last Name</label>
-                <input id='last-name' placeholder='Doe' name='last-name' type='text' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'/>
+                <input id='last-name' placeholder='Doe' name='last-name' type='text' value={form?.l_name ?? ''} class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'/>
+                {#if form?.l_name_missing}<p class='text-error'>Last name is required</p>{/if}
             </div>
         </div>
         <div class='flex flex-col'>
             <label for='team-name'>Team Name</label>
-            <input id='team-name' placeholder="John Doe's Team" name='team-name' type='text' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'/>
+            <input id='team-name' placeholder="John Doe's Team" name='team-name' type='text' value={form?.t_name ?? ''} class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'/>
+            {#if form?.t_name_missing}<p class='text-error'>Team name is required</p>{/if}
         </div>
         <div class='flex flex-col'>
             <label for='email'>Email</label>
-            <input id='email' placeholder='jdoe@example.com' name='email' type='email' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
+            <input id='email' placeholder='jdoe@example.com' name='email' type='email' value={form?.email ?? ''} class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
+            {#if form?.email_missing}<p class='text-error'>Email is required</p>{/if}
         </div>
         <div class='flex flex-col'>
             <label for='password'>Password</label>
             <input id='password' placeholder='Password' name='password' type='password' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
+            {#if form?.password_missing}<p class='text-error'>Password is required</p>{/if}
         </div>
         <div class='flex flex-col'>
             <label for='confirm-password'>Confirm Password</label>

@@ -10,6 +10,7 @@ export default {
         400: '#293241'
       },
       'orange': '#EE6C4D',
+      'error': '#FF0000',
     },
     borderWidth: {
       default: '1px',
