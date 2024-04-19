@@ -1,6 +1,7 @@
 import { ConnectDb } from '$lib/server/mysql.js';
 import { fail } from '@sveltejs/kit';
 import type { Connection } from 'mysql2/promise';
+import { Hash, createHash } from 'crypto';
 
 /** @type {import('./$types').Actions} */
 
@@ -26,8 +27,10 @@ export const actions = {
         if (password.length < 8) return fail(400, {f_name, l_name, t_name, email, password_invalid: true});
         if (password !== confirm_password) return fail(400, {f_name, l_name, t_name, email, password_mismatch: true});
 
-        // const db: Connection = await ConnectDb();
-        // console.log(db);
-        // db.query()
+        const hash_pass: string = createHash('sha512').update(password).digest('hex');
+        console.log(hash_pass)
+
+        const db: Connection = await ConnectDb();
+        db.query("INSERT INTO user_data (email, team_name, last_name, first_name, password) VALUES (?, ?, ?, ?, ?)", [email, t_name, l_name, f_name, hash_pass]);
     }
 };
