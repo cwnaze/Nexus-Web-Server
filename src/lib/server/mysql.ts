@@ -5,7 +5,7 @@ export function ConnectDb() {
   let db = mysql.createConnection({
     host: env.DB_HOST,
     user: env.DB_USER,
-    password: env.DB_PASSWORD,
+    password: env.DB_PASS,
     database: env.DB_NAME,
   });
 
