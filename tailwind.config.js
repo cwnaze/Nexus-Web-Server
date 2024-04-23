@@ -3,13 +3,15 @@ export default {
   content: ["./src/**/*.{html,js,svelte,ts}"],
   theme: {
     colors: {
-      'blue': {
-        100: '#E0FBFC',
-        200: '#98C1D9',
-        300: '#3D5A80',
-        400: '#293241'
+      'yellow': {
+        100: '#FFE6AE',
+        200: '#F0A500',
       },
-      'orange': '#EE6C4D',
+      'blue': {
+        'placeholder': '#33475690',
+        100: '#334756',
+        200: '#082032',
+      },
       'error': '#FF0000',
     },
     borderWidth: {
@@ -30,20 +32,20 @@ export default {
       keyframes: {
         'type-title': {
           '0%': {width: '0'},
-          '0.01%': {'border-right': '50px solid #E0FBFC'},
-          '99.99%': {width: '9em', 'border-right': '50px solid #E0FBFC'},
+          '0.01%': {'border-right': '50px solid #FFE6AE'},
+          '99.99%': {width: '9em', 'border-right': '50px solid #FFE6AE'},
           '100%': {width: 'auto'},
         },
         'type-register': {
           '0%': {width: '0'},
-          '0.01%': {'border-right': '25px solid #E0FBFC'},
-          '99.99%': {width: '5em', 'border-right': '25px solid #E0FBFC'},
+          '0.01%': {'border-right': '25px solid #FFE6AE'},
+          '99.99%': {width: '5em', 'border-right': '25px solid #FFE6AE'},
           '100%': {width: 'auto'},
         },
         'type-login': {
           '0%': {width: '0'},
-          '0.01%': {'border-right': '25px solid #E0FBFC'},
-          '99.99%': {width: '3em', 'border-right': '25px solid #E0FBFC'},
+          '0.01%': {'border-right': '25px solid #FFE6AE'},
+          '99.99%': {width: '3em', 'border-right': '25px solid #FFE6AE'},
           '100%': {width: 'auto'},
         },
       },

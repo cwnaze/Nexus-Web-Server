@@ -1,16 +1,16 @@
-<form class='text-orange flex flex-col justify-center items-center h-screen text-2xl'>
+<form class='text-yellow-200 flex flex-col justify-center items-center h-screen text-2xl'>
     <div class='flex flex-col gap-6 w-128'>
         <div>
-            <a href='/' class='underline hover:text-blue-100'>&larr; Back</a>
+            <a href='/' class='underline hover:text-yellow-100'>&larr; Back</a>
         </div>
         <div class='flex flex-col'>
             <label for='email'>Email</label>
-            <input id='email' type='email' placeholder='jdoe@example.com' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
+            <input id='email' type='email' placeholder='jdoe@example.com' class='bg-yellow-100 rounded-lg text-blue-100 p-3 placeholder:text-blue-placeholder'>
         </div>
         <div class='flex flex-col'>
             <label for='password'>Password</label>
-            <input id='password' type='password' placeholder='Password' class='bg-blue-100 border-blue-200 rounded-lg border-4 text-blue-400 p-3'>
+            <input id='password' type='password' placeholder='Password' class='bg-yellow-100 rounded-lg text-blue-100 p-3 placeholder:text-blue-placeholder'>
         </div>
-        <button class='bg-orange text-blue-100 mx-auto p-3 px-16 rounded-lg border-4 border-orange mt-6 hover:bg-blue-400 hover:text-orange hover:border-blue-200 hover:font-bold'>Login</button>
+        <button class='bg-yellow-200 text-blue-100 font-bold mx-auto p-3 px-16 rounded-lg border-4 border-yellow-200 mt-6 hover:bg-blue-200 hover:text-yellow-200 hover:border-yellow-200'>Login</button>
     </div>
 </form>
