@@ -1,12 +1,15 @@
 import { ConnectDb } from '$lib/server/mysql.js';
-import { fail } from '@sveltejs/kit';
+import { fail, type Actions } from '@sveltejs/kit';
 import type { Connection } from 'mysql2/promise';
-import { Hash, createHash } from 'crypto';
+import { createHash } from 'crypto';
+import jwt from 'jsonwebtoken';
+import { env } from '$env/dynamic/private';
+import type { Secret } from 'jsonwebtoken';
 
 /** @type {import('./$types').Actions} */
 
-export const actions = {
-    register: async ({ request }) => {
+export const actions: Actions = {
+    register: async ({ cookies, request }) => {
         const data: FormData = await request.formData();
 
         //get all form data and assign to variables
@@ -31,5 +34,8 @@ export const actions = {
 
         const db: Connection = await ConnectDb();
         db.query("INSERT INTO user_info (email, team_name, last_name, first_name, password) VALUES (?, ?, ?, ?, ?)", [email, t_name, l_name, f_name, hash_pass]);
+
+        const token: string = jwt.sign({email: email, team_name: t_name, first_name: f_name, last_name: l_name}, env.JWT_SECRET as Secret, {expiresIn: '1h'});
+        cookies.set('authToken', token, {httpOnly: true, maxAge: 60 * 60, path: '/', sameSite: 'strict'});
     }
 };
