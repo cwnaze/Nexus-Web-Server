@@ -1,5 +1,5 @@
 import { ConnectDb } from '$lib/server/mysql.js';
-import { fail, type Actions } from '@sveltejs/kit';
+import { fail, redirect, type Actions } from '@sveltejs/kit';
 import type { Connection } from 'mysql2/promise';
 import { createHash } from 'crypto';
 import jwt from 'jsonwebtoken';
@@ -35,6 +35,8 @@ export const actions: Actions = {
         db.query("INSERT INTO user_info (email, team_name, last_name, first_name, password) VALUES (?, ?, ?, ?, ?)", [email, t_name, l_name, f_name, hash_pass]);
 
         const token: string = jwt.sign({email: email, team_name: t_name, first_name: f_name, last_name: l_name}, env.JWT_SECRET, {expiresIn: '1h'});
-        cookies.set('authToken', token, {httpOnly: true, maxAge: 60 * 60, path: '/', sameSite: 'strict'});
+        console.log(token);
+        cookies.set('authToken', token, {httpOnly: true, maxAge: 60 * 60, sameSite: 'strict', path: '/'});
+        throw redirect(302, '/dashboard');
     }
 };
