@@ -10,7 +10,7 @@ export default {
       'blue': {
         'placeholder': '#33475690',
         100: '#334756',
-        200: '#082032',
+        200: '#293241',
       },
       'error': '#FF0000',
     },
@@ -28,6 +28,9 @@ export default {
     extend: {
       spacing: {
         '128': '32rem',
+      },
+      dropShadow: {
+        'dark': '0 3px 2px rgba(0, 0, 0, 0.25)',
       },
       keyframes: {
         'type-title': {
