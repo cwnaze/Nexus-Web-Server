@@ -9,7 +9,6 @@ export async function handle({ event, resolve }) {
             const decoded = jwt.verify(authToken, env.JWT_SECRET);
             if (!decoded) event.locals.user = undefined;
             else {
-                console.log(decoded);
                 event.locals.user = decoded;
             }
         }
