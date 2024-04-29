@@ -30,7 +30,7 @@
             <input id='email' placeholder='jdoe@example.com' name='email' type='text' value={form?.email ?? ''} class='bg-yellow-100 rounded-lg text-blue-100 p-3 placeholder:text-blue-placeholder'>
             {#if form?.email_missing}<p class='text-error'>Email is required</p>{/if}
             {#if form?.email_invalid}<p class='text-error'>Enter a valid email</p>{/if}
-            {#if form?.email_exists}<p class='text-error'>Email is already in use</p>{/if}
+            {#if form?.email_exists}<p class='text-error'>{form?.email_exists}</p>{/if}
         </div>
         <div class='flex flex-col'>
             <label for='password'>Password</label>
