@@ -28,7 +28,7 @@ export const actions: Actions = {
         if (email === '') return fail(400, {f_name, l_name, t_name, email_missing: true});
         if (email.indexOf('@') === -1 || email.indexOf('.') === -1) return fail(400, {f_name, l_name, t_name, email, email_invalid: true});
         const db_email = await db.query("SELECT email FROM user_info WHERE email = ?", [email]);
-        if (db_email[0].toString().length > 0) retaurn fail(400, {f_name, l_name, t_name, email, email_exists: db_email.toString()});
+        if (db_email[0].toString().length > 0) return fail(400, {f_name, l_name, t_name, email, email_exists: db_email.toString()});
         if (password === '') return fail(400, {f_name, l_name, t_name, email, password_missing: true});
         if (password.length < 8) return fail(400, {f_name, l_name, t_name, email, password_invalid: true});
         if (password !== confirm_password) return fail(400, {f_name, l_name, t_name, email, password_mismatch: true});
