@@ -35,8 +35,10 @@ export const actions: Actions = {
 
         const hash_pass: string = createHash('sha512').update(password).digest('hex');
 
+        //register user
         await db.query("INSERT INTO user_info (email, team_name, last_name, first_name, password) VALUES (?, ?, ?, ?, ?)", [email, t_name, l_name, f_name, hash_pass]);
 
+        // create JWT token
         const token: string = jwt.sign({user: {email: email, team_name: t_name, first_name: f_name, last_name: l_name}}, env.JWT_SECRET, {expiresIn: '1h'});
         cookies.set('authToken', token, {httpOnly: true, maxAge: 60 * 60, sameSite: 'strict', secure: false, path: '/'});
         throw redirect(302, '/dashboard/challenges');
