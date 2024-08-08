@@ -1,16 +1,16 @@
-<script>
+<script lang='ts'>
     import { onMount } from "svelte";
     import RFB from "@novnc/novnc/lib/rfb";
     import Navbar from "../navbar.svelte";
   
     let rfb;
-    let container;
+    let container: any;
   
     const connectToVnc = () => {
-      const url = 'ws://172.16.106.132:6080'; // Update with your WebSocket URL
+      const url = 'ws://172.16.106.132:6080';
   
       rfb = new RFB(container, url, {
-        credentials: { password: "password"},
+        credentials: { username: '', password: "password", target: ''},
       });
   
       rfb.addEventListener("connect", () => {
