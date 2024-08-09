@@ -2,12 +2,14 @@
     import { onMount } from "svelte";
     import RFB from "@novnc/novnc/lib/rfb";
     import Navbar from "../../navbar.svelte";
+    import {page} from '$app/stores';
 
     let rfb;
     let container: any;
 
     const connectToVnc = () => {
-        const url = 'ws://172.16.106.132:6080';
+        const ip_address = $page.url.searchParams.get('ip');
+        const url = 'ws://' + ip_address + ':6080';
         rfb = new RFB( container, url, {
             credentials: { username: '', password: "password", target: ''},
         });

@@ -11,4 +11,4 @@
 
 <Navbar/>
 
-<p class='text-yellow-200'>{data.challenge_info.ip_address}</p>
+<a href="/dashboard/challenges/vnc?ip={data.challenge_info.ip_address}" class='text-yellow-200'>{data.challenge_info.ip_address}</a>
