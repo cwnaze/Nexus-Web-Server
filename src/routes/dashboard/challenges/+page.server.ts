@@ -8,7 +8,5 @@ export async function load({ locals }) {
     const db: Connection = await ConnectDb();
     const challenge_info: any | FieldPacket = await db.query("SELECT ip_address,challenge_name FROM team_challenge WHERE team_name = ?", [locals.user.user.team_name]);
 
-    return { user_info: locals.user.user, challenge_info: challenge_info[0][0] };
+    return { user_info: locals.user.user, challenge_info: challenge_info[0] };
 }
-
-
