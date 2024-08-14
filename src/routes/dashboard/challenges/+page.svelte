@@ -11,7 +11,16 @@
 
 <Navbar/>
 
-{#each Object.entries(data.challenge_info) as [index, challenge]}
-    <a href="/dashboard/challenges/vnc?ip={challenge.ip_address}" class='text-yellow-200'>{challenge.ip_address}</a>
-    <br/>
-{/each}
+<div class='grid grid-cols-3 gap-6 m-4'>
+    {#each Object.entries(data.master_info) as [index, master]}
+        <a href="/dashboard/challenges/vnc?ip={data.challenge_info[Number(index)].ip_address}" class='text-yellow-200'>
+            <div>
+                <img src={master.thumbnail} alt={master.challenge_name}/>
+                <div class='border-4 border-blue-100 p-2'>
+                    <p class='text-center font-black text-xl'>{master.challenge_name}</p>
+                    <p class='text-wrap text-center text-yellow-100'>{master.description}</p>
+                </div>
+            </div>
+        </a>
+    {/each}
+</div>
