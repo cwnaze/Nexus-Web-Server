@@ -21,11 +21,6 @@
             </div>
         </div>
         <div class='flex flex-col'>
-            <label for='team-name'>Team Name</label>
-            <input id='team-name' placeholder="John Doe's Team" name='team-name' type='text' value={form?.t_name ?? ''} class='bg-yellow-100 rounded-lg text-blue-100 p-3 placeholder:text-blue-placeholder'/>
-            {#if form?.t_name_missing}<p class='text-error'>Team name is required</p>{/if}
-        </div>
-        <div class='flex flex-col'>
             <label for='email'>Email</label>
             <input id='email' placeholder='jdoe@example.com' name='email' type='text' value={form?.email ?? ''} class='bg-yellow-100 rounded-lg text-blue-100 p-3 placeholder:text-blue-placeholder'>
             {#if form?.email_missing}<p class='text-error'>Email is required</p>{/if}
