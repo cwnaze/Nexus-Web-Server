@@ -12,7 +12,6 @@ export async function load({ locals }) {
         var temp: any = await db.query("SELECT * FROM master_challenge WHERE challenge_name = ?", [challenge_info[0][i].challenge_name]);
         master_info.push(temp[0][0]);
     }
-    console.log(challenge_info[0].ip_address);
 
     return { user_info: locals.user.user, challenge_info: challenge_info[0], master_info: master_info };
 }

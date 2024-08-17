@@ -15,18 +15,6 @@
         });
 
         rfb.background = 'rgb(41 50 65)';
-
-        rfb.addEventListener("connect", () => {
-        console.log("Connected to VNC server");
-        });
-
-        rfb.addEventListener("disconnect", () => {
-        console.log("Disconnected from VNC server");
-        });
-
-        rfb.addEventListener("credentialsrequired", () => {
-        console.log("VNC server requires credentials");
-        });
     };
 
     onMount(() => {
