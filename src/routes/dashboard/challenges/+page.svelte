@@ -1,5 +1,5 @@
 <script lang='ts'>
-    import Navbar from "../navbar.svelte";
+    import Navbar from "$lib/components/navbar.svelte";
 
     export let data: {
         user_info: { email: string; team_name: string; first_name: string; last_name: string; };

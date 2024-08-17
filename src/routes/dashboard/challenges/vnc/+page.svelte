@@ -1,7 +1,7 @@
 <script lang='ts'>
     import { onMount } from "svelte";
     import RFB from "@novnc/novnc/lib/rfb";
-    import Navbar from "../../navbar.svelte";
+    import Navbar from "$lib/components/navbar.svelte";
     import {page} from '$app/stores';
 
     let rfb;
