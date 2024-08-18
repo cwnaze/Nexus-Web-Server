@@ -32,6 +32,6 @@ export const actions: Actions = {
         const user: [any, FieldPacket[]] = await db.query("SELECT email, team_name, first_name, last_name FROM user_info WHERE email = ?", [email]);
         const token: string = jwt.sign({user: user[0][0]}, env.JWT_SECRET, {expiresIn: '1h'});
         cookies.set('authToken', token, {httpOnly: true, maxAge: 60 * 60, sameSite: 'strict', secure: false, path: '/'});
-        throw redirect(302, '/dashboard/challenges');
+        throw redirect(302, '/dashboard');
     }
 };

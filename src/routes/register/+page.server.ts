@@ -39,6 +39,6 @@ export const actions: Actions = {
         // create JWT token
         const token: string = jwt.sign({user: {email: email, first_name: f_name, last_name: l_name}}, env.JWT_SECRET, {expiresIn: '1h'});
         cookies.set('authToken', token, {httpOnly: true, maxAge: 60 * 60, sameSite: 'strict', secure: false, path: '/'});
-        throw redirect(302, '/dashboard/challenges');
+        throw redirect(302, '/dashboard');
     }
 };
