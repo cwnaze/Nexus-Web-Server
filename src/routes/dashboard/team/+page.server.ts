@@ -17,7 +17,7 @@ export async function load({ locals }) {
 export const actions: Actions = {
     create_team: async ({ cookies, request }) => {
         const data: FormData = await request.formData();
-        const team_name: string = data.get('team_name')?.toString() ?? '';
+        const team_name: string = data.get('team-name')?.toString() ?? '';
         const password: string = data.get('password')?.toString() ?? '';
 
         const db: Connection = await ConnectDb();
@@ -27,7 +27,7 @@ export const actions: Actions = {
         const team_name_check = await db.query("SELECT team_name FROM team_info WHERE team_name = ?", [team_name]);
         if (team_name_check[0].toString().length > 0) return fail(400, {team_name, team_name_exists: true});
 
-        await db.query("INSERT INTO user_info (team_name) VALUES (?) WHERE email = (?)", [team_name, cookie_info.email]);
+        await db.query("UPDATE user_info SET team_name = (?) WHERE email = (?)", [team_name, cookie_info.email]);
         const hashed_pass = createHash('sha512').update(password).digest('hex');
         await db.query("INSERT INTO team_info (team_name, password) VALUES (?, ?)", [team_name, hashed_pass]);
         cookies.delete('authToken', {path: '/'});
