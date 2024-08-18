@@ -1,6 +1,6 @@
 import { ConnectDb } from '$lib/server/mysql';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
-import type { Connection, FieldPacket, QueryResult, RowDataPacket } from 'mysql2/promise';
+import type { Connection, FieldPacket } from 'mysql2/promise';
 import { createHash } from 'crypto';
 import jwt from 'jsonwebtoken';
 import { env } from '$env/dynamic/private';
