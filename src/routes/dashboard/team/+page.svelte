@@ -20,7 +20,14 @@
             <input id='password' placeholder='Password' name='password' type='password' class='bg-yellow-100 rounded-lg text-blue-100 p-3 placeholder:text-blue-placeholder'>
             {#if form?.password_missing}<p class='text-error'>Password is required</p>{/if}
         </div>
+        <div class='flex flex-col'>
+            <label for='confirm-password'>Confirm Password</label>
+            <input id='confirm-password' placeholder='Confirm Password' name='confirm-password' type='password' class='bg-yellow-100 rounded-lg text-blue-100 p-3 placeholder:text-blue-placeholder'>
+            {#if form?.confirm_password_missing}<p class='text-error'>Confirm Password is required</p>{/if}
+            {#if form?.password_mismatch}<p class='text-error'>Passwords do not match</p>{/if}
         <button class='bg-yellow-200 text-blue-100 font-bold mx-auto p-3 px-16 rounded-lg border-4 border-yellow-200 mt-6 hover:bg-blue-200 hover:text-yellow-200'>Create Team</button>
-        <button class='bg-blue-200 text-yellow-200 font-bold mx-auto p-3 px-16 rounded-lg border-4 border-yellow-200 mt-6 hover:bg-yellow-200 hover:text-blue-100'>Join a Team</button>
     </div>
 </form>
+<div class='flex justify-center'>
+    <a href="/dashboard/team/join"><button class='bg-blue-200 text-yellow-200 font-bold p-3 px-16 rounded-lg border-4 border-yellow-200 mt-6 hover:bg-yellow-200 hover:text-blue-100'>Join a Team</button></a>
+</div>
