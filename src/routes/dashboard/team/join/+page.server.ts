@@ -10,8 +10,12 @@ import { env } from '$env/dynamic/private';
 let cookie_info: any;
 
 export async function load({ locals }) {
-    if(locals.user.user.team_name) return redirect(302, '/dashboard/team');
-    if(!locals.user) return redirect(302, '/login');
+    if(!locals.user) {
+         return redirect(302, '/login');
+    }
+    if(locals.user.user.team_name) {
+        return redirect(302, '/dashboard/team/');
+    }
     cookie_info = locals.user.user;
 }
 
