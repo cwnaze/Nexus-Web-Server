@@ -12,12 +12,14 @@
         <div class='flex flex-col'>
             <label for='team_name'>Team Name</label>
             <input id='team_name' placeholder="John Doe's Team"  name='team_name' type='text' value={form?.t_name ?? ''} class='bg-yellow-100 rounded-lg text-blue-100 p-3 placeholder:text-blue-placeholder'>
+            {#if form?.team_name_missing}<p class='text-error'>Team name is required</p>{/if}
+            {#if form?.team_full}<p class='text-error'>Team is full</p>{/if}
         </div>
         <div class='flex flex-col'>
             <label for='password'>Password</label>
             <input id='password' placeholder='Password' name='password' type='password' class='bg-yellow-100 rounded-lg text-blue-100 p-3 placeholder:text-blue-placeholder'>
             {#if form?.password_missing}<p class='text-error'>Password is required</p>{/if}
-            {#if form?.invalid_login}<p class='text-error'>Email or password is incorrect</p>{/if}
+            {#if form?.invalid_login}<p class='text-error'>Team Name or password is incorrect</p>{/if}
         </div>
         <button class='bg-yellow-200 text-blue-100 font-bold mx-auto p-3 px-16 rounded-lg border-4 border-yellow-200 mt-6 hover:bg-blue-200 hover:text-yellow-200 hover:border-yellow-200'>Join Team</button>
     </div>

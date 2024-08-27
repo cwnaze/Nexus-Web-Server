@@ -30,7 +30,7 @@ export const actions: Actions = {
         const db: Connection = await ConnectDb();
 
         //form validation
-        if (t_name === '') return fail(400, {email_missing: true});
+        if (t_name === '') return fail(400, {team_name_missing: true});
         if (password === '') return fail(400, {t_name, password_missing: true});
 
         const db_email = await db.query("SELECT team_name FROM team_info WHERE team_name = ?", [t_name]);
@@ -39,6 +39,9 @@ export const actions: Actions = {
         const db_pass: [any, FieldPacket[]] = await db.query("SELECT password FROM team_info WHERE team_name = ?", [t_name]);
         const hash_pass: string = createHash('sha512').update(password).digest('hex');
         if (db_pass[0][0].password.toString() !== hash_pass) return fail(400, {t_name, invalid_login: true});
+
+        const team_members: any = await db.query("SELECT first_name FROM user_info WHERE team_name = ?", [t_name]);
+        if (team_members[0].length >= 4) return fail(400, {t_name, team_full: true});
 
         await db.query("UPDATE user_info SET team_name = (?) WHERE email = (?)", [t_name, cookie_info.email]);
 
