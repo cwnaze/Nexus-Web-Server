@@ -2,7 +2,6 @@ import { redirect } from "@sveltejs/kit";
 import { ConnectDb } from '$lib/server/mysql';
 import type { Connection } from 'mysql2/promise';
 
-
 export async function load({ locals }) {
     if(!locals.user) {
         return redirect(302, '/login');

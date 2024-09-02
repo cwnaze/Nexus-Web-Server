@@ -28,9 +28,9 @@
 	"dependencies": {
 		"@novnc/novnc": "^1.5.0",
 		"@types/novnc__novnc": "^1.5.0",
+		"chart.js": "^4.4.4",
 		"crypto": "^1.0.1",
 		"jsonwebtoken": "^9.0.2",
-		"mysql2": "^3.9.6",
-		"victory-pie": "^37.1.0"
+		"mysql2": "^3.9.6"
 	}
 }
