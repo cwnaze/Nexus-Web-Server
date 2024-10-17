@@ -6,39 +6,6 @@
         team_members: { name: string}[];
     };
 
-    import { ChartJSNodeCanvas } from 'chartjs-node-canvas';
-  
-  export const load = async () => {
-    const width = 400; // Width of the chart
-    const height = 400; // Height of the chart
-    const chartCallback = (ChartJS) => {
-      ChartJS.defaults.global.elements.rectangle.borderWidth = 2;
-    };
-    const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height, chartCallback });
-
-    const configuration = {
-      type: 'pie',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow'],
-        datasets: [
-          {
-            label: 'My First Dataset',
-            data: [300, 50, 100],
-            backgroundColor: ['red', 'blue', 'yellow'],
-          },
-        ],
-      },
-    };
-
-    const image = await chartJSNodeCanvas.renderToBuffer(configuration);
-
-    return {
-      props: {
-        image: image.toString('base64'),
-      },
-    };
-  };
-
 </script>
 
 <Navbar/>
