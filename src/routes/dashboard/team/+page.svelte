@@ -6,6 +6,46 @@
         team_members: { name: string}[];
     };
 
+    import { Radar } from 'svelte-chartjs';
+    const chartData = {
+      labels: [
+        'Eating',
+        'Drinking',
+        'Sleeping',
+        'Designing',
+        'Coding',
+        'Cycling',
+        'Running',
+      ],
+      datasets: [
+        {
+          label: 'My First dataset',
+          backgroundColor: '#f0a500',
+          borderColor: '#f0a500',
+          data: [65, 59, 90, 81, 56, 55, 40],
+        },
+      ],
+    };
+
+  import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    PointElement,
+    RadialLinearScale,
+    LineElement,
+  } from 'chart.js';
+
+  ChartJS.register(
+    Title,
+    Tooltip,
+    Legend,
+    PointElement,
+    RadialLinearScale,
+    LineElement
+  );
+
 </script>
 
 <Navbar/>
@@ -15,8 +55,8 @@
     <h2 class='text-2xl font-bold text-yellow-200'>{data.team_points} Points</h2>
     <h2 class='text-2xl font-bold text-yellow-200'>#1</h2>
 </div>
-<div class='grid grid-cols-3 mx-40 mt-8 gap-8'>
-    <div class='bg-blue-100 p-8 flex flex-col gap-4'>
+<div class='grid grid-cols-3 grid-rows-2 mx-40 mt-8 gap-8'>
+    <div class='bg-blue-100 p-8 flex flex-col gap-4 justify-center row-span-1'>
         {#each Object.entries(data.team_members) as [index, name]}
             {#if Number(index) > 0}
                 <hr class='border-blue-200 border-2'/>
@@ -24,7 +64,7 @@
             <p class='text-lg text-yellow-200 text-center'>{name}</p>
         {/each}
     </div>
-    <div class='grid-cols-subgrid col-span-2'>
-        <h3>Point breakdown</h3>
+    <div class='grid-cols-subgrid col-span-2 row-span-2 ml-56'>
+        <Radar data={chartData} options={{ responsive: true, scales: { r: { pointLabels: { color: '#FFE6AE'}, grid: { color: '#334756'}, angleLines: { color: '#334756'}}}}} />
     </div>
 </div>
