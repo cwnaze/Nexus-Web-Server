@@ -50,21 +50,35 @@
 
 <Navbar/>
 
-<h1 class='text-4xl font-black text-yellow-200 text-center mt-4'>{data.user_info.team_name}</h1>
+<h1 class='text-4xl font-black text-yellow-200 text-center mt-16'>{data.user_info.team_name}</h1>
 <div class='flex items-center justify-between mx-40 bg-blue-100 p-5 mt-8'>
     <h2 class='text-2xl font-bold text-yellow-200'>{data.team_points} Points</h2>
     <h2 class='text-2xl font-bold text-yellow-200'>#1</h2>
 </div>
-<div class='grid grid-cols-3 grid-rows-2 mx-40 mt-8 gap-8'>
-    <div class='bg-blue-100 p-8 flex flex-col gap-4 justify-center row-span-1'>
-        {#each Object.entries(data.team_members) as [index, name]}
-            {#if Number(index) > 0}
-                <hr class='border-blue-200 border-2'/>
-            {/if}
-            <p class='text-lg text-yellow-200 text-center'>{name}</p>
-        {/each}
+<div class='grid grid-cols-3 mx-40 mt-8 gap-8'>
+    <div>
+      <div class='bg-blue-100 p-8 pt-4 flex flex-col gap-4 justify-center row-span-1'>
+          <h3 class='text-2xl font-bold text-center text-yellow-200'>Team Members</h3>
+          {#each Object.entries(data.team_members) as [index, name]}
+              {#if Number(index) > 0}
+                  <hr class='border-blue-200 border-2'/>
+              {/if}
+              <p class='text-lg text-yellow-100 text-center'>{name}</p>
+          {/each}
+      </div>
     </div>
-    <div class='grid-cols-subgrid col-span-2 row-span-2 ml-56'>
+    <div class='grid-cols-subgrid'>
         <Radar data={chartData} options={{ responsive: true, scales: { r: { pointLabels: { color: '#FFE6AE'}, grid: { color: '#334756'}, angleLines: { color: '#334756'}}}}} />
+    </div>
+    <div>
+      <div class='bg-blue-100 p-8 pt-4 flex flex-col gap-4 justify-center row-span-1'>
+          <h3 class='text-2xl font-bold text-center text-yellow-200'>Leaderboard</h3>
+          {#each Object.entries(data.team_members) as [index, name]}
+              {#if Number(index) > 0}
+                  <hr class='border-blue-200 border-2'/>
+              {/if}
+              <p class='text-lg text-yellow-100 text-center'>{name}</p>
+          {/each}
+      </div>
     </div>
 </div>
