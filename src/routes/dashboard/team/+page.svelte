@@ -9,20 +9,18 @@
     import { Radar } from 'svelte-chartjs';
     const chartData = {
       labels: [
-        'Eating',
-        'Drinking',
-        'Sleeping',
-        'Designing',
-        'Coding',
-        'Cycling',
-        'Running',
+        'Linux',
+        'Windows',
+        'Red Team',
+        'Blue Team',
+        'Networking',
       ],
       datasets: [
         {
-          label: 'My First dataset',
+          label: 'Catagories',
           backgroundColor: '#f0a500',
           borderColor: '#f0a500',
-          data: [65, 59, 90, 81, 56, 55, 40],
+          data: [65, 59, 90, 81, 56,],
         },
       ],
     };
