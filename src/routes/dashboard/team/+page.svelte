@@ -11,9 +11,10 @@
       labels: [
         'Linux',
         'Windows',
+        'Server Management',
+        'Database Management',
         'Red Team',
-        'Blue Team',
-        'Networking',
+        'Python',
       ],
       datasets: [
         {
