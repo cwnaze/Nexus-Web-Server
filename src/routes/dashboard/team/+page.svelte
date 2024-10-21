@@ -4,6 +4,7 @@
         user_info: { email: string; team_name: string; first_name: string; last_name: string; };
         team_points: { points: number; };
         team_members: { name: string}[];
+        leaderboard: { team: string}[];
     };
 
     import { Radar } from 'svelte-chartjs';
@@ -72,11 +73,11 @@
     <div>
       <div class='bg-blue-100 p-8 pt-4 flex flex-col gap-4 justify-center row-span-1'>
           <h3 class='text-2xl font-bold text-center text-yellow-200'>Leaderboard</h3>
-          {#each Object.entries(data.team_members) as [index, name]}
+          {#each Object.entries(data.leaderboard) as [index, team]}
               {#if Number(index) > 0}
                   <hr class='border-blue-200 border-2'/>
               {/if}
-              <p class='text-lg text-yellow-100 text-center'>{name}</p>
+              <p class='text-lg text-yellow-100 text-center'>{team}</p>
           {/each}
       </div>
     </div>

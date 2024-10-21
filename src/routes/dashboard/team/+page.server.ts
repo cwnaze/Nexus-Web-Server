@@ -16,10 +16,17 @@ export async function load({ locals }) {
 
     const total_points = (team_points[0][0]['SUM(points)']);
 
+    const leaderboard = await fetch('http://127.0.0.1:8000/top-4').then(res => res.json());
+
+    for (let i = 0; i < leaderboard.length; i++) {
+        leaderboard[i][0] = leaderboard[i][0] + " - " + leaderboard[i][1] + " points";
+        leaderboard[i].splice(1, 1);
+    }
+
     let team_member_names = [];
     for (let i = 0; i < team_members[0].length; i++) {
         team_member_names.push(team_members[0][i].first_name + " " + team_members[0][i].last_name);
     }
 
-    return { user_info: locals.user.user, team_points: total_points, team_members: team_member_names };
+    return { user_info: locals.user.user, team_points: total_points, team_members: team_member_names, leaderboard: leaderboard };
 }
