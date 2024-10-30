@@ -21,9 +21,9 @@
     <div class='flex-1 flex justify-center'><img src='/images/NexusLogo.svg' class='mr-auto' alt='Nexus Logo'></div>
     <div class='flex-1 flex justify-center'>
         <ul class='flex gap-12 text-yellow-200 justify-center mx-auto text-xl'>
-            <li class="hover:underline"><a href="/dashboard/challenges">Challenges</a></li>
-            <li class="hover:underline"><a href="/dashboard/team">My Team</a></li>
-            <li>Leaderboard</li>
+            <li class='hover:underline'><a href='/dashboard/challenges'>Challenges</a></li>
+            <li class='hover:underline'><a href='/dashboard/team'>My Team</a></li>
+            <li class='hover:underline'><a href='/dashboard/leaderboard'>Leaderboard</a></li>
         </ul>
     </div>
     <div class='flex-1 flex justify-center'>
