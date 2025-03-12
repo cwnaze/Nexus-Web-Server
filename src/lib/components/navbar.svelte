@@ -1,17 +1,8 @@
 <script>
     import { goto } from '$app/navigation';
 
-    // Function to handle cookie deletion
-    function deleteCookie(name) {
-        // Set the cookie's expiration date to the past to delete it
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    }
-
     // Logout function to delete the authToken cookie and redirect
     function logout() {
-        // Delete the authToken cookie
-        deleteCookie('authToken');
-
         // Redirect to the login page using SvelteKit's goto
         goto('/login');  // Adjust the path to your login page
     }
