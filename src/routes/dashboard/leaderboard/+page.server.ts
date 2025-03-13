@@ -12,7 +12,7 @@ export async function load({ locals }) {
 
     const db: Connection = await ConnectDb();
 
-    const leaderboard = await fetch('http://127.0.0.1:8000/leaderboard').then(res => res.json());
+    const leaderboard = await fetch('http://10.8.8.20:8000/leaderboard').then(res => res.json());
 
     for (let i = 0; i < leaderboard.length; i++) {
         leaderboard[i][0] = leaderboard[i][0] + " - " + leaderboard[i][1] + " points";

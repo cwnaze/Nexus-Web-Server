@@ -16,7 +16,7 @@ export async function load({ locals }) {
 
     const total_points = (team_points[0][0]['SUM(points)']);
 
-    const leaderboard = await fetch('http://127.0.0.1:8000/top-4').then(res => res.json());
+    const leaderboard = await fetch('http://10.8.8.20:8000/top-4').then(res => res.json());
 
     for (let i = 0; i < leaderboard.length; i++) {
         leaderboard[i][0] = leaderboard[i][0] + " - " + leaderboard[i][1] + " points";
