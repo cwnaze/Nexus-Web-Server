@@ -1,7 +1,6 @@
 <script lang='ts'>
     import { onMount } from "svelte";
-    //import RFB from "@novnc/novnc/lib/rfb";
-    const RFB = require('@novnc/novnc/lib/rfb').default;
+    let RFB: any;
     import Navbar from "$lib/components/navbar.svelte";
     import {page} from '$app/stores';
 
@@ -18,7 +17,9 @@
         rfb.background = 'rgb(41 50 65)';
     };
 
-    onMount(() => {
+    onMount(async () => {
+        const module = await import("@novnc/novnc/lib/rfb");
+        RFB = module.default;
         connectToVnc();
     });
 </script>
