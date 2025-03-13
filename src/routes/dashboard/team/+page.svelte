@@ -7,44 +7,44 @@
         leaderboard: { team: string}[];
     };
 
-    import { Radar } from 'svelte-chartjs';
-    const chartData = {
-      labels: [
-        'Linux',
-        'Windows',
-        'Server Management',
-        'Database Management',
-        'Red Team',
-        'Python',
-      ],
-      datasets: [
-        {
-          label: 'Catagories',
-          backgroundColor: '#f0a500',
-          borderColor: '#f0a500',
-          data: [65, 59, 90, 81, 56,],
-        },
-      ],
-    };
+  //   import { Radar } from 'svelte-chartjs';
+  //   const chartData = {
+  //     labels: [
+  //       'Linux',
+  //       'Windows',
+  //       'Server Management',
+  //       'Database Management',
+  //       'Red Team',
+  //       'Python',
+  //     ],
+  //     datasets: [
+  //       {
+  //         label: 'Catagories',
+  //         backgroundColor: '#f0a500',
+  //         borderColor: '#f0a500',
+  //         data: [65, 59, 90, 81, 56,],
+  //       },
+  //     ],
+  //   };
 
-  import {
-    Chart as ChartJS,
-    Title,
-    Tooltip,
-    Legend,
-    PointElement,
-    RadialLinearScale,
-    LineElement,
-  } from 'chart.js';
+  // import {
+  //   Chart as ChartJS,
+  //   Title,
+  //   Tooltip,
+  //   Legend,
+  //   PointElement,
+  //   RadialLinearScale,
+  //   LineElement,
+  // } from 'chart.js';
 
-  ChartJS.register(
-    Title,
-    Tooltip,
-    Legend,
-    PointElement,
-    RadialLinearScale,
-    LineElement
-  );
+  // ChartJS.register(
+  //   Title,
+  //   Tooltip,
+  //   Legend,
+  //   PointElement,
+  //   RadialLinearScale,
+  //   LineElement
+  // );
 
 </script>
 
@@ -67,9 +67,9 @@
           {/each}
       </div>
     </div>
-    <div class='grid-cols-subgrid'>
+    <!-- <div class='grid-cols-subgrid'>
         <Radar data={chartData} options={{ responsive: true, scales: { r: { pointLabels: { color: '#FFE6AE'}, grid: { color: '#334756'}, angleLines: { color: '#334756'}}}}} />
-    </div>
+    </div> -->
     <div>
       <div class='bg-blue-100 p-8 pt-4 flex flex-col gap-4 justify-center row-span-1'>
           <h3 class='text-2xl font-bold text-center text-yellow-200'>Leaderboard</h3>
