@@ -68,7 +68,8 @@
       </div>
     </div>
     <div class='bg-blue-100 p-8 pt-4 flex flex-col gap-4 justify-center row-span-1'>
-        <img src='/images/hacker.gif' alt='Cat Hacker' class='mx-auto'/>
+      <h3 class='text-2xl font-bold text-center text-yellow-200'>Motivation</h3>
+      <img src='/images/hacker.gif' alt='Cat Hacker' class='mx-auto'/>
     </div>
     <!-- <div class='grid-cols-subgrid'>
         <Radar data={chartData} options={{ responsive: true, scales: { r: { pointLabels: { color: '#FFE6AE'}, grid: { color: '#334756'}, angleLines: { color: '#334756'}}}}} />
