@@ -1,9 +1,20 @@
-import { ConnectDb } from '$lib/server/mysql';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
-import type { Connection, FieldPacket } from 'mysql2/promise';
+import type { PoolConnection } from 'mysql2/promise';
 import { createHash } from 'crypto';
 import jwt from 'jsonwebtoken';
 import { env } from '$env/dynamic/private';
+import { createPool } from 'mysql2/promise'; // Ensure the pool is created properly
+
+// Create a shared connection pool
+const pool = createPool({
+    host: env.DB_HOST,
+    user: env.DB_USER,
+    password: env.DB_PASSWORD,
+    database: env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
 
 /** @type {import('./$types').Actions} */
 
@@ -31,23 +42,24 @@ export const actions: Actions = {
         if (t_name === '') return fail(400, { team_name_missing: true });
         if (password === '') return fail(400, { t_name, password_missing: true });
 
-        const db: Connection = await ConnectDb();
+        let connection: PoolConnection | null = null; // Use PoolConnection type
 
         try {
-            await db.beginTransaction(); // Start transaction
+            connection = await pool.getConnection();
+            await connection.beginTransaction(); // Start transaction
 
             // Check if team exists
-            const [team_result]: any = await db.query(
+            const [team_result]: any = await connection.query(
                 'SELECT team_name FROM team_info WHERE team_name = ?',
                 [t_name]
             );
             if (team_result.length === 0) {
-                await db.rollback();
+                await connection.rollback();
                 return fail(400, { t_name, invalid_login: true });
             }
 
             // Check if the password is correct
-            const [password_result]: any = await db.query(
+            const [password_result]: any = await connection.query(
                 'SELECT password FROM team_info WHERE team_name = ?',
                 [t_name]
             );
@@ -56,39 +68,39 @@ export const actions: Actions = {
                 password_result.length === 0 ||
                 password_result[0].password.toString() !== hash_pass
             ) {
-                await db.rollback();
+                await connection.rollback();
                 return fail(400, { t_name, invalid_login: true });
             }
 
             // Lock the row of the current user to avoid concurrent modifications
-            const [user_result]: any = await db.query(
+            const [user_result]: any = await connection.query(
                 'SELECT email, team_name FROM user_info WHERE email = ? FOR UPDATE',
                 [cookie_info.email]
             );
 
             if (user_result.length === 0) {
-                await db.rollback();
+                await connection.rollback();
                 return fail(400, { error: 'User not found' });
             }
 
             // Check if the team is full
-            const [team_members]: any = await db.query(
+            const [team_members]: any = await connection.query(
                 'SELECT first_name FROM user_info WHERE team_name = ?',
                 [t_name]
             );
             if (team_members.length >= 4) {
-                await db.rollback();
+                await connection.rollback();
                 return fail(400, { t_name, team_full: true });
             }
 
             // Update user's team name
-            await db.query('UPDATE user_info SET team_name = ? WHERE email = ?', [
+            await connection.query('UPDATE user_info SET team_name = ? WHERE email = ?', [
                 t_name,
                 cookie_info.email
             ]);
 
             // Commit the transaction
-            await db.commit();
+            await connection.commit();
 
             // Invalidate and create a new JWT token with updated team info
             cookies.delete('authToken', { path: '/' });
@@ -115,10 +127,12 @@ export const actions: Actions = {
             throw redirect(302, '/dashboard/challenges');
         } catch (err) {
             console.error('Error joining team:', err);
-            await db.rollback(); // Rollback on failure
+            if (connection) await connection.rollback(); // Rollback on failure
             return fail(500, { error: 'Internal Server Error' });
         } finally {
-            db.end(); // Make sure to release the connection
+            if (connection) {
+                connection.release(); // Release the connection back to the pool
+            }
         }
     }
 };
