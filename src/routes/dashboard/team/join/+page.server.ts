@@ -10,10 +10,10 @@ import { env } from '$env/dynamic/private';
 let cookie_info: any;
 
 export async function load({ locals }) {
-    if(!locals.user) {
-         return redirect(302, '/login');
+    if (!locals.user) {
+        return redirect(302, '/login');
     }
-    if(locals.user.user.team_name) {
+    if (locals.user.user.team_name) {
         return redirect(302, '/dashboard/team/');
     }
     cookie_info = locals.user.user;
@@ -23,32 +23,102 @@ export const actions: Actions = {
     join_team: async ({ cookies, request }) => {
         const data: FormData = await request.formData();
 
-        //get all form data and assign to variables
+        // Get all form data and assign to variables
         const t_name: string = data.get('team_name')?.toString() ?? '';
         const password: string = data.get('password')?.toString() ?? '';
 
+        // Form validation
+        if (t_name === '') return fail(400, { team_name_missing: true });
+        if (password === '') return fail(400, { t_name, password_missing: true });
+
         const db: Connection = await ConnectDb();
 
-        //form validation
-        if (t_name === '') return fail(400, {team_name_missing: true});
-        if (password === '') return fail(400, {t_name, password_missing: true});
+        try {
+            await db.beginTransaction(); // Start transaction
 
-        const db_email = await db.query("SELECT team_name FROM team_info WHERE team_name = ?", [t_name]);
-        if (db_email[0].toString().length === 0) return fail(400, {t_name, invalid_login: true});
+            // Check if team exists
+            const [team_result]: any = await db.query(
+                'SELECT team_name FROM team_info WHERE team_name = ?',
+                [t_name]
+            );
+            if (team_result.length === 0) {
+                await db.rollback();
+                return fail(400, { t_name, invalid_login: true });
+            }
 
-        const db_pass: [any, FieldPacket[]] = await db.query("SELECT password FROM team_info WHERE team_name = ?", [t_name]);
-        const hash_pass: string = createHash('sha512').update(password).digest('hex');
-        if (db_pass[0][0].password.toString() !== hash_pass) return fail(400, {t_name, invalid_login: true});
+            // Check if the password is correct
+            const [password_result]: any = await db.query(
+                'SELECT password FROM team_info WHERE team_name = ?',
+                [t_name]
+            );
+            const hash_pass: string = createHash('sha512').update(password).digest('hex');
+            if (
+                password_result.length === 0 ||
+                password_result[0].password.toString() !== hash_pass
+            ) {
+                await db.rollback();
+                return fail(400, { t_name, invalid_login: true });
+            }
 
-        const team_members: any = await db.query("SELECT first_name FROM user_info WHERE team_name = ?", [t_name]);
-        if (team_members[0].length >= 4) return fail(400, {t_name, team_full: true});
+            // Lock the row of the current user to avoid concurrent modifications
+            const [user_result]: any = await db.query(
+                'SELECT email, team_name FROM user_info WHERE email = ? FOR UPDATE',
+                [cookie_info.email]
+            );
 
-        await db.query("UPDATE user_info SET team_name = (?) WHERE email = (?)", [t_name, cookie_info.email]);
+            if (user_result.length === 0) {
+                await db.rollback();
+                return fail(400, { error: 'User not found' });
+            }
 
-        // create JWT token
-        cookies.delete('authToken', {path: '/'});
-        const token: string = jwt.sign({user: {email: cookie_info.email, team_name: t_name, first_name: cookie_info.first_name, last_name: cookie_info.last_name}}, env.JWT_SECRET, {expiresIn: '1h'});
-        cookies.set('authToken', token, {httpOnly: true, maxAge: 60 * 60, sameSite: 'strict', secure: false, path: '/'});
-        throw redirect(302, '/dashboard/challenges');
+            // Check if the team is full
+            const [team_members]: any = await db.query(
+                'SELECT first_name FROM user_info WHERE team_name = ?',
+                [t_name]
+            );
+            if (team_members.length >= 4) {
+                await db.rollback();
+                return fail(400, { t_name, team_full: true });
+            }
+
+            // Update user's team name
+            await db.query('UPDATE user_info SET team_name = ? WHERE email = ?', [
+                t_name,
+                cookie_info.email
+            ]);
+
+            // Commit the transaction
+            await db.commit();
+
+            // Invalidate and create a new JWT token with updated team info
+            cookies.delete('authToken', { path: '/' });
+            const token: string = jwt.sign(
+                {
+                    user: {
+                        email: cookie_info.email,
+                        team_name: t_name,
+                        first_name: cookie_info.first_name,
+                        last_name: cookie_info.last_name
+                    }
+                },
+                env.JWT_SECRET,
+                { expiresIn: '1h' }
+            );
+            cookies.set('authToken', token, {
+                httpOnly: true,
+                maxAge: 60 * 60,
+                sameSite: 'strict',
+                secure: false,
+                path: '/'
+            });
+
+            throw redirect(302, '/dashboard/challenges');
+        } catch (err) {
+            console.error('Error joining team:', err);
+            await db.rollback(); // Rollback on failure
+            return fail(500, { error: 'Internal Server Error' });
+        } finally {
+            db.end(); // Make sure to release the connection
+        }
     }
 };
